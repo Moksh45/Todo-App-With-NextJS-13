@@ -1,14 +1,24 @@
-import "../styles/app.scss"
+import "../styles/app.scss";
+import Header from "./header";
+import { ContextProvider } from "../components/Clients";
+
 
 export const metadata = {
   title: 'Todo App',
   description: 'This is a Todo App Project',
 }
- 
+
 export default function RootLayout({ children }) {
- return (
+  return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ContextProvider>
+          <>
+            <Header />
+            {children}
+          </>
+        </ContextProvider>
+      </body>
     </html>
   )
 }

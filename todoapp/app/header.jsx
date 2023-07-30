@@ -1,8 +1,21 @@
+import Link from 'next/link'
 import React from 'react'
+import { LogoutBtn } from '../components/Clients'
 
 const header = () => {
   return (
-    <div>header</div>
+    <div className='header'>
+      <div>
+        <h2>
+          Todo
+        </h2>
+      </div>
+      <article>
+        <Link href={"/"}>Home</Link>
+        <Link href={"/about"}>About</Link>
+        <LogoutBtn />
+      </article>
+    </div>
   )
 }
 
