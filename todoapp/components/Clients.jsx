@@ -1,9 +1,9 @@
 "use client"
 
 import Link from "next/link";
-import { useState, createContext } from "react";
+import { useState, createContext, useContext } from "react";
 
-export const Context = createContext({ user: {} })
+const Context = createContext({ user: {} })
 
 export const ContextProvider = ({ children }) => {
 
@@ -24,10 +24,11 @@ export const LogoutBtn = () => {
     const logoutHandler = () => {
         alert("logged out")
     }
+
+    const { user } = useContext(Context)
     return (
-        <>
-            <Link href={"/login"}>Login</Link>
-            <button className="btn" onClick={logoutHandler}>Logout</button>
-        </>
+        user.id ? <button className="btn" onClick={logoutHandler}>
+            Logout
+        </button> : (<Link href={"/login"}>Login</Link>)
     )
 };
