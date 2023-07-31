@@ -1,14 +1,12 @@
 import { connectDB } from "../../utils/features"
 import { Task } from "../../models/task"
+import { errorHandler } from "@/middlewares/error";
 
 
 const handler = async (req, res) => {
 
     if (req.method !== "POST") {
-        return res.status(400).json({
-            success: false,
-            message: "Only Post Method is allowed"
-        })
+        return errorHandler(res, 400, "Only Post Method is allowed")
     }
 
     await connectDB();
