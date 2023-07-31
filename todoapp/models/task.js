@@ -13,18 +13,17 @@ const schema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    user:{
-        type:mongoose.Schema.Types.ObjectId,
+    user: {
+        type: String,
         required: true,
         ref: "User",
     },
-    createdAt:{
+    createdAt: {
         type: Date,
         default: Date.now,
     },
+});
 
-})
+mongoose.models = {};
 
-mongoose.model = {};
-
-export const Task = mongoose.model("Task", schema)
+export const Task = mongoose.model("Task", schema);
