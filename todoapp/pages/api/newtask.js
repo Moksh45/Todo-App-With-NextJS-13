@@ -1,9 +1,10 @@
 import { connectDB } from "../../utils/features"
 import { Task } from "../../models/task"
-import { errorHandler } from "@/middlewares/error";
+import { asyncError, errorHandler } from "@/middlewares/error";
 
 
-const handler = async (req, res) => {
+const handler = asyncError(
+    async (req, res) => {
 
     if (req.method !== "POST") {
         return errorHandler(res, 400, "Only Post Method is allowed")
@@ -23,6 +24,6 @@ const handler = async (req, res) => {
         success: true,
         message: "task Created",
     });
-};
+});
 
 export default handler;
