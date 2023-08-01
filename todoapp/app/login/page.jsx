@@ -1,25 +1,65 @@
 "use client";
-import Link from 'next/link'
-import React from 'react'
 
-const page = () => {
-    return <div className='login'>
-        <section>
-            <form>
-                <input type='email' placeholder='Enter Email'/>
-                <input type='password' placeholder='Enter Password'/>
-                <button type='submit'>Login</button>
+import Link from "next/link";
+import React, { useContext, useState } from "react";
+import { Context } from "../../components/Clients";
+import { redirect } from "next/navigation";
+import { toast } from "react-hot-toast";
 
-                <p>OR</p>
-                <Link href={"/register"}>New User</Link>
-            </form>
-        </section>
-    </div>
-}
+const Page = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const { user, setUser } = useContext(Context);
 
-export const metadata = {
-    title: 'Login',
-    description: 'This is the login page of Todo App Project',
-  }
+    const loginHandler = async (e) => {
+        e.preventDefault();
 
-export default page;
+        try {
+            const res = await fetch("/api/auth/login", {
+                method: "POST",
+                body: JSON.stringify({
+                    email,
+                    password,
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            const data = await res.json();
+            if (!data.success) return toast.error(data.message);
+            setUser(data.user);
+            toast.success(data.message);
+        } catch (error) {
+            return toast.error(error);
+        }
+    };
+
+    if (user._id) return redirect("/");
+
+    return (
+        <div className="login">
+            <section>
+                <form onSubmit={loginHandler}>
+                    <input
+                        onChange={(e) => setEmail(e.target.value)}
+                        value={email}
+                        type="email"
+                        placeholder="Enter Email"
+                    />
+                    <input
+                        onChange={(e) => setPassword(e.target.value)}
+                        value={password}
+                        type="password"
+                        placeholder="Enter Password"
+                    />
+                    <button type="submit">Login</button>
+
+                    <p>OR</p>
+                    <Link href={"/register"}>New User</Link>
+                </form>
+            </section>
+        </div>
+    );
+};
+
+export default Page;

@@ -37,6 +37,7 @@ const handler = asyncError(async (req, res) => {
     res.status(200).json({
         success: true,
         message: `Welcome Back, ${user.name}`,
+        user,
     });
 });
 
