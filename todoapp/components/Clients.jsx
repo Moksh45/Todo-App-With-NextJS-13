@@ -9,6 +9,7 @@ export const Context = createContext({ user: {} });
 export const ContextProvider = ({ children }) => {
     const [user, setUser] = useState({});
 
+
     useEffect(() => {
         fetch("/api/auth/me")
             .then((res) => res.json())
