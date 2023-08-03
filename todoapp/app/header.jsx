@@ -1,22 +1,20 @@
-import Link from 'next/link'
-import React from 'react'
-import { LogoutBtn } from '../components/Clients'
+import Link from "next/link";
+import React from "react";
+import { LogoutBtn } from "../components/Clients";
 
-const header = () => {
+const Header = () => {
   return (
-    <div className='header'>
+    <div className="header">
       <div>
-        <h2>
-          Todo
-        </h2>
+        <h2>Todo.</h2>
       </div>
       <article>
         <Link href={"/"}>Home</Link>
-        <Link href={"/about"}>About</Link>
+        <Link href={"/profile"}>Profile</Link>
         <LogoutBtn />
       </article>
     </div>
-  )
-}
+  );
+};
 
-export default header
+export default Header;
